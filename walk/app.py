@@ -2,7 +2,6 @@ from bs4 import BeautifulSoup
 import requests
 import re
 import random
-import sys
 from flask import Flask, render_template
 
 app = Flask(__name__)
@@ -26,7 +25,7 @@ def get_random_line(band_name='Vampire_Weekend'):
     page = requests.get('https://en.wikipedia.org/wiki/{0}_discography'.format(band_name))
     discography_soup = BeautifulSoup(page.content,'html.parser')
   except:
-    print('Error opening artist link:', sys.exc_info()[0])
+    print('Error opening artist link')
     raise
   
   album_list = discography_soup.find(attrs={'id':'Studio_albums'}).findNext('table', attrs={'class': 'wikitable plainrowheaders'}).find_all('th',attrs={'scope':'row'})
@@ -79,7 +78,7 @@ def first_band():
     for i in range(3):
         lines.append(get_random_line(bands[0]))
     
-    return render_template('first_band.html', text = lines[0])
+    return render_template('first_band.html', text = '123')
 
 @app.route('/second_band')
 
@@ -88,7 +87,7 @@ def second_band():
     for i in range(3):
         lines.append(get_random_line(bands[1]))
     
-    return render_template('second_band.html', lines = lines)
+    return render_template('second_band.html', text = '123')
 
 @app.route('/third_band')
 
@@ -97,4 +96,4 @@ def second_band():
     for i in range(3):
         lines.append(get_random_line(bands[2]))
     
-    return render_template('third_band.html', lines = lines)
+    return render_template('third_band.html', text = '123')
