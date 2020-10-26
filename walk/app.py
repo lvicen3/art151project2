@@ -46,7 +46,6 @@ stopwords = get_stopwords()
 bands = ['Vampire_Weekend', 'Radiohead', 'Interpol','MGMT','The_Strokes']
 display_bands = ['Vampire Weekend', 'Radiohead', 'Interpol','MGMT','The Strokes']
 N_LINES = 3
-# random.seed(300)  
 
 def get_random_line(band_name='Vampire_Weekend'):
   # # pull discography table from band's wiki
