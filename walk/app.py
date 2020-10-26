@@ -44,6 +44,7 @@ def get_stopwords():
 
 stopwords = get_stopwords()	
 bands = ['Vampire_Weekend', 'Radiohead', 'Interpol','MGMT','The_Strokes']
+display_bands = ['Vampire Weekend', 'Radiohead', 'Interpol','MGMT','The Strokes']
 N_LINES = 3
 # random.seed(300)  
 
@@ -116,7 +117,7 @@ def get_art(words):
 @app.route('/')
 
 def index():
-    return render_template("index.html",band_names = bands)
+    return render_template("index.html",band_names = display_bands)
 
 @app.route('/first_band', methods=['GET', 'POST'])
 def first_band():
@@ -141,8 +142,9 @@ def first_band():
     img_words = [random.choice(word_set) for word_set in word_sets]
 
     img_url = get_art(img_words)
+    print(img_url)
 
-    return render_template('first_band.html', band_name=bands[0], lines = lines,img_url=img_url,band_names=bands)
+    return render_template('first_band.html', band_name=bands[0], lines = lines,image=img_url,band_names=display_bands)
 
 @app.route('/second_band', methods=['GET', 'POST'])
 def second_band():
@@ -168,7 +170,7 @@ def second_band():
 
     img_url = get_art(img_words)
 
-    return render_template('second_band.html', band_name=bands[1], lines = lines,img_url=img_url,band_names=bands)
+    return render_template('second_band.html', band_name=bands[1], lines = lines,img_url=img_url,band_names=display_bands)
 
 @app.route('/third_band', methods=['GET', 'POST'])
 def third_band():
@@ -194,7 +196,7 @@ def third_band():
 
     img_url = get_art(img_words)
 
-    return render_template('third_band.html', band_name=bands[2], lines = lines,img_url=img_url,band_names=bands)
+    return render_template('third_band.html', band_name=bands[2], lines = lines,img_url=img_url,band_names=display_bands)
 
 @app.route('/fourth_band', methods=['GET', 'POST'])
 def fourth_band():
@@ -220,7 +222,7 @@ def fourth_band():
 
     img_url = get_art(img_words)
 
-    return render_template('fourth_band.html', band_name=bands[3], lines = lines,img_url=img_url,band_names=bands)
+    return render_template('fourth_band.html', band_name=bands[3], lines = lines,img_url=img_url,band_names=display_bands)
 
 @app.route('/fifth_band', methods=['GET', 'POST'])
 def fifth_band():
@@ -246,7 +248,7 @@ def fifth_band():
 
     img_url = get_art(img_words)
 
-    return render_template('fifth_band.html', band_name=bands[4], lines = lines,img_url=img_url,band_names=bands)
+    return render_template('fifth_band.html', band_name=bands[4], lines = lines,img_url=img_url,band_names=display_bands)
 
 if __name__ == '__main__':
     app.run(debug=True)

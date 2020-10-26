@@ -1,10 +1,18 @@
-.home-body {
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-size: cover;
+  background-position: center center;
   display: flex;
-  height: 100vh;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  text-align: center;
-  background: #1A1E23;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
 }
 
 ul {
@@ -23,13 +31,15 @@ li {
   background-color: #1A1E23;
   position: fixed; 
   top: 0; 
-  width: 100%; 
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .navbar a {
-  float: left;
+  float: center;
   display: block;
-  font-family: Lato, sans-serif;
+  font-family: "Poppins", sans-serif;
   color: #f2f2f2;
   text-align: center;
   padding: 14px 16px;
@@ -47,9 +57,15 @@ li {
   text-transform: uppercase;
 }
 
+.main-cover {
+  display: flex;
+}
 .main {
   margin-top: 55px; 
-  
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
 }
 
 .grow { transition: all .2s ease-in-out; }
@@ -57,7 +73,7 @@ li {
 
 
 h2 {
-  padding: 14px 16px;
-  font-family: Lato, sans-serif;
-  color: #ecf0f1;
+  font-weight: normal;
+  font-size: 3rem;
+  margin-top: 1rem;
 }
