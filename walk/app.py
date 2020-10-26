@@ -11,7 +11,7 @@ app = Flask(__name__)
 stopwords = get_stopwords()	
 bands = ['Vampire_Weekend', 'Radiohead', 'U2']
 N_LINES = 3
-random.seed(300)
+# random.seed(300)
 
 def get_random_line(band_name='Vampire_Weekend'):
   # # pull discography table from band's wiki
@@ -49,6 +49,8 @@ def get_random_line(band_name='Vampire_Weekend'):
   parsed_band = band_name.lower().capitalize().replace('_','-')
   genius_url = 'https://genius.com/' + parsed_band + '-' + parsed_song + '-lyrics'
   
+  print('URL:', genius_url)
+
   # page = requests.get('https://genius.com/Vampire-weekend-hannah-hunt-lyrics')
   page = requests.get(genius_url)
   soup = BeautifulSoup(page.content,'html.parser')
@@ -56,7 +58,10 @@ def get_random_line(band_name='Vampire_Weekend'):
 
   lyrics_str = lyrics.get_text()
   lyrics_str = re.sub(r'\[[^]]*\][\n\r]','',lyrics_str)
-  lines = re.split(r'[\n\r]+', lyrics_str)
+  lines = re.split(r'[\n\r]+', lyrics_str)  
+  print('LINES 1:', lines)
+  lines = [line for line in lines if re.match(r'^[A-Za-z]+', line)]
+  print('LINES 2:', lines)
   
   return random.choice(lines)
 
@@ -89,15 +94,18 @@ def first_band():
     lines = []
     for i in range(N_LINES):
         lines.append(get_random_line(bands[0]))
-    
+
+    print('LINES:', lines)
+
     word_sets = []
     for line in lines:
         temp = []
         for word in get_tokens(line):
-            if word in stopwords:
-                temp.append(get_tokens(line))
-        words.append(temp)
+            if not word in stopwords:
+                temp.append(word)
+        word_sets.append(temp)
 
+    print('WORD SETS:', word_sets)
     img_words = [random.choice(word_set) for word_set in word_sets]
 
     img_url = get_art(img_words)
@@ -121,3 +129,9 @@ def third_band():
         lines.append(get_random_line(bands[2]))
     
     return render_template('third_band.html', band_names=bands[2], lines = lines)
+
+# def main():
+#     first_band()
+
+# if __name__ == '__main__':
+# 	main()
