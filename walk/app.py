@@ -248,6 +248,4 @@ def fifth_band():
     img_url = get_art(img_words)
 
     return render_template('fifth_band.html', band_name=bands[4], lines = lines,image=img_url,band_names=display_bands)
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    

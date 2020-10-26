@@ -63,7 +63,6 @@ li {
 .main {
   margin-top: 55px; 
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   text-align: center;
 }
