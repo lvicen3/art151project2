@@ -170,7 +170,7 @@ def second_band():
 
     img_url = get_art(img_words)
 
-    return render_template('second_band.html', band_name=bands[1], lines = lines,img_url=img_url,band_names=display_bands)
+    return render_template('second_band.html', band_name=bands[1], lines = lines,image=img_url,band_names=display_bands)
 
 @app.route('/third_band', methods=['GET', 'POST'])
 def third_band():
@@ -196,7 +196,7 @@ def third_band():
 
     img_url = get_art(img_words)
 
-    return render_template('third_band.html', band_name=bands[2], lines = lines,img_url=img_url,band_names=display_bands)
+    return render_template('third_band.html', band_name=bands[2], lines = lines,image=img_url,band_names=display_bands)
 
 @app.route('/fourth_band', methods=['GET', 'POST'])
 def fourth_band():
@@ -222,7 +222,7 @@ def fourth_band():
 
     img_url = get_art(img_words)
 
-    return render_template('fourth_band.html', band_name=bands[3], lines = lines,img_url=img_url,band_names=display_bands)
+    return render_template('fourth_band.html', band_name=bands[3], lines = lines,image=img_url,band_names=display_bands)
 
 @app.route('/fifth_band', methods=['GET', 'POST'])
 def fifth_band():
@@ -248,7 +248,7 @@ def fifth_band():
 
     img_url = get_art(img_words)
 
-    return render_template('fifth_band.html', band_name=bands[4], lines = lines,img_url=img_url,band_names=display_bands)
+    return render_template('fifth_band.html', band_name=bands[4], lines = lines,image=img_url,band_names=display_bands)
 
 if __name__ == '__main__':
     app.run(debug=True)
