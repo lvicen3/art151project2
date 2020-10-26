@@ -10,12 +10,11 @@
 </head>
 <body class="home-body">
     <div class="row navbar">
-            <a class='grow' href="index.html">home</a></li>
-            <a class='grow' href="first_band.html">{{band_names[0]}}</a>
-            <a class='grow' href="second_band.html">{{band_names[1]}}</a>
-            <a class='grow' href="third_band.html">{{band_names[2]}}</a>
-            <a class='grow' href="fourth_band.html">{{band_names[3]}}</a>
-            <a class='grow' href="fifth_band.html">{{band_names[4]}}</a>
+            <a class='grow' href="{{ url_for('first_band') }}">{{band_names[0]}}</a>
+            <a class='grow' href="{{ url_for('second_band') }}">{{band_names[1]}}</a>
+            <a class='grow' href="{{ url_for('third_band') }}">{{band_names[2]}}</a>
+            <a class='grow' href="{{ url_for('fourth_band') }}">{{band_names[3]}}</a>
+            <a class='grow' href="{{ url_for('fifth_band') }}">{{band_names[4]}}</a>
     </div>
     <div class="main" style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('{{image_url}}');">
         <h2>{{lines[0]}}</h2>
