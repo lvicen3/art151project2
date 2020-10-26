@@ -4,10 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Project 2</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Derive</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
+    <link rel="stylesheet" href="../static/style.css">
 </head>
-<body>
-    <h2>Page</h2>
+<body class="home-body">
+    <ul>
+        <li><a class='grow menu-text' href="#">home</a></li>
+        <li><a class='grow menu-text' href="first_band.html">{{band_names[0]}}</a></li>
+        <li><a class='grow menu-text' href="second_band.html">{{band_names[1]}}</a></li>
+        <li><a class='grow menu-text' href="third_band.html">{{band_names[2]}}</a></li>
+        <li><a class='grow menu-text' href="fourth_band.html">{{band_names[3]}}</a></li>
+        <li><a class='grow menu-text' href="fifth_band.html">{{band_names[4]}}</a></li>
+    </ul>
 </body>
 </html>

@@ -116,7 +116,7 @@ def get_art(words):
 @app.route('/')
 
 def index():
-    return render_template("index.html")
+    return render_template("index.html",band_names = bands)
 
 @app.route('/first_band')
 
