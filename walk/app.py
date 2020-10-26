@@ -1,22 +1,17 @@
-from bs4 import BeautifulSoup
 import requests
 import re
 import random
+
+from bs4 import BeautifulSoup
+from utils import get_tokens, get_stopwords
 from flask import Flask, render_template
 
 app = Flask(__name__)
 
+stopwords = get_stopwords()	
 bands = ['Vampire_Weekend', 'Radiohead', 'U2']
-
-# Function to split a document into a list of tokens
-# Arguments:
-# doc: A string containing input document
-# Returns: tokens (list)
-# Where, tokens (list) is a list of tokens that the document is split into
-def get_tokens(doc):
-	tokens = re.split(r"[^A-Za-z0-9-']", doc)
-	tokens = list(filter(len, tokens))
-	return tokens
+N_LINES = 3
+random.seed(300)
 
 def get_random_line(band_name='Vampire_Weekend'):
   # # pull discography table from band's wiki
@@ -65,6 +60,23 @@ def get_random_line(band_name='Vampire_Weekend'):
   
   return random.choice(lines)
 
+def get_art(words):
+    headers = {'User-Agent': 'Mozilla/5.0'}
+    url = 'https://unsplash.com/s/photos/{0}-{1}-{2}'.format(words[0],words[1],words[2])
+    page = requests.get(url, headers = headers)
+    soup = BeautifulSoup(page.content,'html.parser')
+    figures = soup.findAll('figure')
+    img_links = []
+    for figure in figures:
+        try:
+            img_links.append(figure.find('img').get('src'))
+        except:
+            ()        
+    
+    img_links = [img_link for img_link in img_links if re.match(r'(.+)photo(.+)', img_link)]
+
+    return random.choice(img_links)
+
 #set route for user navigation
 @app.route('/')
 
@@ -75,25 +87,37 @@ def index():
 
 def first_band():
     lines = []
-    for i in range(3):
+    for i in range(N_LINES):
         lines.append(get_random_line(bands[0]))
     
-    return render_template('first_band.html', lines = lines)
+    word_sets = []
+    for line in lines:
+        temp = []
+        for word in get_tokens(line):
+            if word in stopwords:
+                temp.append(get_tokens(line))
+        words.append(temp)
+
+    img_words = [random.choice(word_set) for word_set in word_sets]
+
+    img_url = get_art(img_words)
+
+    return render_template('first_band.html', band_names=bands[0], lines = lines,img_url=img_url)
 
 @app.route('/second_band')
 
 def second_band():
     lines = []
-    for i in range(3):
+    for i in range(N_LINES):
         lines.append(get_random_line(bands[1]))
     
-    return render_template('second_band.html', lines = lines)
+    return render_template('second_band.html', band_names=bands[1], lines = lines)
 
 @app.route('/third_band')
 
 def third_band():
     lines = []
-    for i in range(3):
+    for i in range(N_LINES):
         lines.append(get_random_line(bands[2]))
     
-    return render_template('third_band.html', lines = lines)
+    return render_template('third_band.html', band_names=bands[2], lines = lines)
