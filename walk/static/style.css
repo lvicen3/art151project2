@@ -1,0 +1,14 @@
+/* 
+* {
+  box-sizing: border-box;
+} */
+
+body {
+  background-size: cover;
+  background-position: center center;
+  min-height: 100vh;
+}
+
+h2 {
+  color: red;
+}

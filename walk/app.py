@@ -9,9 +9,9 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 stopwords = get_stopwords()	
-bands = ['Vampire_Weekend', 'Radiohead', 'U2']
+bands = ['Vampire_Weekend', 'Radiohead', 'Interpol','MGMT','The_Strokes']
 N_LINES = 3
-# random.seed(300)
+# random.seed(300)  
 
 def get_random_line(band_name='Vampire_Weekend'):
   # # pull discography table from band's wiki
@@ -48,8 +48,6 @@ def get_random_line(band_name='Vampire_Weekend'):
   # parsed_song = ((re.search('"(\w[\s\w]*)"', song).group(1)).lower()).replace(' ','-')
   parsed_band = band_name.lower().capitalize().replace('_','-')
   genius_url = 'https://genius.com/' + parsed_band + '-' + parsed_song + '-lyrics'
-  
-  print('URL:', genius_url)
 
   # page = requests.get('https://genius.com/Vampire-weekend-hannah-hunt-lyrics')
   page = requests.get(genius_url)
@@ -59,9 +57,7 @@ def get_random_line(band_name='Vampire_Weekend'):
   lyrics_str = lyrics.get_text()
   lyrics_str = re.sub(r'\[[^]]*\][\n\r]','',lyrics_str)
   lines = re.split(r'[\n\r]+', lyrics_str)  
-  print('LINES 1:', lines)
   lines = [line for line in lines if re.match(r'^[A-Za-z]+', line)]
-  print('LINES 2:', lines)
   
   return random.choice(lines)
 
@@ -93,9 +89,13 @@ def index():
 def first_band():
     lines = []
     for i in range(N_LINES):
-        lines.append(get_random_line(bands[0]))
-
-    print('LINES:', lines)
+        while True:
+            try:
+                lines.append(get_random_line(bands[0]))
+            except:
+                ()
+            else:
+                break
 
     word_sets = []
     for line in lines:
@@ -105,7 +105,6 @@ def first_band():
                 temp.append(word)
         word_sets.append(temp)
 
-    print('WORD SETS:', word_sets)
     img_words = [random.choice(word_set) for word_set in word_sets]
 
     img_url = get_art(img_words)
@@ -117,21 +116,108 @@ def first_band():
 def second_band():
     lines = []
     for i in range(N_LINES):
-        lines.append(get_random_line(bands[1]))
-    
-    return render_template('second_band.html', band_names=bands[1], lines = lines)
+        while True:
+            try:
+                lines.append(get_random_line(bands[1]))
+            except:
+                ()
+            else:
+                break
+
+    word_sets = []
+    for line in lines:
+        temp = []
+        for word in get_tokens(line):
+            if not word in stopwords:
+                temp.append(word)
+        word_sets.append(temp)
+
+    img_words = [random.choice(word_set) for word_set in word_sets]
+
+    img_url = get_art(img_words)
+
+    return render_template('second_band.html', band_names=bands[1], lines = lines,img_url=img_url)
 
 @app.route('/third_band')
 
 def third_band():
     lines = []
     for i in range(N_LINES):
-        lines.append(get_random_line(bands[2]))
-    
-    return render_template('third_band.html', band_names=bands[2], lines = lines)
+        while True:
+            try:
+                lines.append(get_random_line(bands[2]))
+            except:
+                ()
+            else:
+                break
 
-# def main():
-#     first_band()
+    word_sets = []
+    for line in lines:
+        temp = []
+        for word in get_tokens(line):
+            if not word in stopwords:
+                temp.append(word)
+        word_sets.append(temp)
 
-# if __name__ == '__main__':
-# 	main()
+    img_words = [random.choice(word_set) for word_set in word_sets]
+
+    img_url = get_art(img_words)
+
+    return render_template('third_band.html', band_names=bands[2], lines = lines,img_url=img_url)
+
+@app.route('/fourth_band')
+
+def fourth_band():
+    lines = []
+    for i in range(N_LINES):
+        while True:
+            try:
+                lines.append(get_random_line(bands[3]))
+            except:
+                ()
+            else:
+                break
+
+    word_sets = []
+    for line in lines:
+        temp = []
+        for word in get_tokens(line):
+            if not word in stopwords:
+                temp.append(word)
+        word_sets.append(temp)
+
+    img_words = [random.choice(word_set) for word_set in word_sets]
+
+    img_url = get_art(img_words)
+
+    return render_template('fourth_band.html', band_names=bands[3], lines = lines,img_url=img_url)
+
+@app.route('/fifth_band')
+
+def fifth_band():
+    lines = []
+    for i in range(N_LINES):
+        while True:
+            try:
+                lines.append(get_random_line(bands[4]))
+            except:
+                ()
+            else:
+                break
+
+    word_sets = []
+    for line in lines:
+        temp = []
+        for word in get_tokens(line):
+            if not word in stopwords:
+                temp.append(word)
+        word_sets.append(temp)
+
+    img_words = [random.choice(word_set) for word_set in word_sets]
+
+    img_url = get_art(img_words)
+
+    return render_template('fifth_band.html', band_names=bands[4], lines = lines,img_url=img_url)
+
+if __name__ == '__main__':
+    app.run(debug=True)
