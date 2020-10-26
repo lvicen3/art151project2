@@ -87,7 +87,7 @@ def second_band():
     for i in range(3):
         lines.append(get_random_line(bands[1]))
     
-    return render_template('second_band.html', text = '123')
+    return render_template('second_band.html', lines = lines)
 
 @app.route('/third_band')
 
@@ -96,4 +96,4 @@ def third_band():
     for i in range(3):
         lines.append(get_random_line(bands[2]))
     
-    return render_template('third_band.html', text = '123')
+    return render_template('third_band.html', lines = lines)
