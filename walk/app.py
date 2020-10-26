@@ -78,7 +78,7 @@ def first_band():
     for i in range(3):
         lines.append(get_random_line(bands[0]))
     
-    return render_template('first_band.html', text = '123')
+    return render_template('first_band.html', lines = lines)
 
 @app.route('/second_band')
 
