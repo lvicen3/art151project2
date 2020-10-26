@@ -3,7 +3,6 @@ import re
 import random
 
 from bs4 import BeautifulSoup
-from utils import get_tokens, get_stopwords
 from flask import Flask, render_template
 
 app = Flask(__name__)
