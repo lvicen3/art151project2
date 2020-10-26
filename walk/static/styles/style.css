@@ -57,13 +57,8 @@ li {
   text-transform: uppercase;
 }
 
-.main-cover {
-  display: flex;
-}
 .main {
   margin-top: 55px; 
-  display: flex;
-  justify-content: center;
   text-align: center;
 }
 
