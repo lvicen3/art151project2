@@ -91,7 +91,7 @@ def second_band():
 
 @app.route('/third_band')
 
-def second_band():
+def third_band():
     lines = []
     for i in range(3):
         lines.append(get_random_line(bands[2]))
